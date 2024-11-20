@@ -1,0 +1,143 @@
+                                                                                                                                                                            <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Zodiac Sign</title>
+    <style>
+        body {
+            background-image: url('https://framerusercontent.com/images/gJtIgPv1KcReQqYtkgub8Si6rFY.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden; /* Prevent double scrollbar */
+        }
+        .zodiac-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Four items per row */
+            gap: 20px;
+            background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            margin: 20px auto;
+            max-height: 400px; /* Adjust height as needed */ 
+            overflow-y: auto; /* Enable scroll only in this container */
+        }
+        .zodiac-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .zodiac-item img {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.2s ease;
+        }
+        .zodiac-item img:hover {
+            transform: scale(1.1);
+        }
+        .zodiac-item p {
+            color: white;
+            font-size: 18px;
+            margin: 5px 0 0 0;
+        }
+        .submit-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>Select Your Zodiac Sign</h2>
+    <form id="zodiacForm" action="menuoptions.html" method="GET">
+        <input type="hidden" id="selectedZodiac" name="zodiac">
+        
+        <div class="zodiac-container">
+            <label class="zodiac-item" onclick="selectZodiac('Aries')">
+                <img src="https://e7.pngegg.com/pngimages/303/853/png-clipart-aries-astrological-sign-astrology-zodiac-symbol-aries-love-text.png" alt="Aries">
+                <p>Aries</p>
+            </label>
+            <label class="zodiac-item" onclick="selectZodiac('Taurus')">
+                <img src="https://banner2.cleanpng.com/20180205/pzw/av28s3egm.webp" alt="Taurus">
+                <p>Taurus</p>
+            </label>
+            <label class="zodiac-item" onclick="selectZodiac('Gemini')">
+                <img src="https://banner2.cleanpng.com/20180525/jqx/kisspng-gemini-astrological-sign-zodiac-ascendant-symbol-zodiac-constellation-5b08840837a5e7.1941720215272847442279.jpg" alt="Gemini">
+                <p>Gemini</p>
+            </label>
+            <label class="zodiac-item" onclick="selectZodiac('Cancer')">
+                <img src="https://img.favpng.com/2/12/9/computer-icons-cancer-symbol-zodiac-astrological-sign-png-favpng-eJ5UtHmY6zgt5zUWHRHBsJVr3.jpg" alt="Cancer">
+                <p>Cancer</p>
+            </label>
+            <label class="zodiac-item" onclick="selectZodiac('Leo')">
+                <img src="https://banner2.cleanpng.com/20180527/rhx/avqxbi71z.webp" alt="Leo">
+                <p>Leo</p>
+            </label>
+            <label class="zodiac-item" onclick="selectZodiac('Virgo')">
+                <img src="https://i.pinimg.com/736x/e3/d5/a2/e3d5a2e1b96f0ff9d18857666b656072.jpg" alt="Virgo">
+                <p>Virgo</p>
+            </label>
+            <label class="zodiac-item" onclick="selectZodiac('Libra')">
+                <img src="https://e7.pngegg.com/pngimages/547/1021/png-clipart-libra-astrological-sign-zodiac-astrological-symbols-libra-text-logo.png" alt="Libra">
+                <p>Libra</p>
+            </label>
+            <label class="zodiac-item" onclick="selectZodiac('Scorpio')">
+                <img src="https://i.pinimg.com/736x/6f/0d/e1/6f0de1b682f81cb2b3b41dd13a92b1d0.jpg" alt="Scorpio">
+                <p>Scorpio</p>
+            </label>
+            <label class="zodiac-item" onclick="selectZodiac('Sagittarius')">
+                <img src="https://banner2.cleanpng.com/20180410/doe/avgv9dowm.webp" alt="Sagittarius">
+                <p>Sagittarius</p>
+            </label>
+            <label class="zodiac-item" onclick="selectZodiac('Capricorn')">
+                <img src="https://banner2.cleanpng.com/20180205/uxe/av28ttn2j.webp" alt="Capricorn">
+                <p>Capricorn</p>
+            </label>
+            <label class="zodiac-item" onclick="selectZodiac('Aquarius')">
+                <img src="https://thumbs.dreamstime.com/b/black-ink-aquarius-zodiac-sign-astrological-icon-isolated-aquarius-astrology-zodiac-symbol-clip-art-white-background-black-ink-120065973.jpg" alt="Aquarius">
+                <p>Aquarius</p>
+            </label>
+            <label class="zodiac-item" onclick="selectZodiac('Pisces')">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQO0u1mJ0aIvmWpS1UtuhGJOlOW6FIG3U2PVQ&s" alt="Pisces">
+                <p>Pisces</p>
+            </label>
+            
+        </div>
+        
+        <button type="button" class="submit-button" onclick="submitForm()">Submit Zodiac</button>
+    </form>
+
+    <script>
+        let selectedSign = null;
+
+        function selectZodiac(sign) {
+            selectedSign = sign;
+            document.getElementById('selectedZodiac').value = sign;
+            alert(sign + " has been selected.");
+        }
+
+        function submitForm() {
+            if (selectedSign) {
+                document.getElementById('zodiacForm').submit();
+            } else {
+                alert("Please select a zodiac sign first.");
+            }
+        }
+    </script>
+</body>
+</html>

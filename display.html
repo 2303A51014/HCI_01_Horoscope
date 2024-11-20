@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-image: url('https://framerusercontent.com/images/gJtIgPv1KcReQqYtkgub8Si6rFY.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #333;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #555;
+        }
+        .next-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .next-button:hover {
+            background-color: #45a049;
+        }
+        .thank-you {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Zodiac Predictions</h1>
+        <div class="result" id="result">
+            <!-- Zodiac predictions will be shown here initially -->
+        </div>
+
+        <!-- After feedback submission, show the thank you message -->
+        <div class="thank-you" id="thank-you-message" style="display: none;">
+            Thank you for your feedback and visiting our website!
+        </div>
+
+        <!-- Button to go to the next page or show thank you message -->
+        <button class="next-button" id="next-btn">Next</button>
+    </div>
+
+    <script src="menuoptions.js"></script>
+
+    <script>
+        // Get parameters from the URL
+        const params = new URLSearchParams(window.location.search);
+        const zodiacSign = params.get('zodiac') || "Aries"; // Default to Aries if not in URL
+        const basisSelections = params.get('basis') ? params.get('basis').split(",") : []; // Get selected basis options
+        const lifeplanSelections = params.get('lifeplan') ? params.get('lifeplan').split(",") : []; // Get selected life plan options
+
+        // Debugging logs
+        console.log("Zodiac Sign:", zodiacSign);
+        console.log("Basis Selections:", basisSelections);
+        console.log("Lifeplan Selections:", lifeplanSelections);
+
+        // Get the result div
+        const resultDiv = document.getElementById("result");
+        const thankYouMessage = document.getElementById("thank-you-message");
+    
+        let resultHTML = `<h3>${zodiacSign} Predictions:</h3>`;
+        
+        // Collect time predictions (weekly/monthly/yearly)
+        let timePredictionsHTML = [];
+        
+        if (zodiacData[zodiacSign]) {
+            const timeData = zodiacData[zodiacSign].time;
+
+            basisSelections.forEach(selection => {
+                if (timeData[selection]) {
+                    timePredictionsHTML.push(`<strong>${selection.charAt(0).toUpperCase() + selection.slice(1)}:</strong> ${timeData[selection]}`);
+                } else {
+                    console.log(`No data found for ${zodiacSign} - ${selection}`); // Debugging log
+                }
+            });
+    
+            // Join insights with a separator if any are found
+            if (timePredictionsHTML.length > 0) {
+                resultHTML += `<p>${timePredictionsHTML.join(' | ')}</p>`;
+            } else {
+                resultHTML += `<p>No time predictions available for ${zodiacSign}.</p>`;
+            }
+
+            // Collect insights (health/wealth/relationship)
+            let insightsHTML = [];
+            const insightsData = zodiacData[zodiacSign].insights;
+
+            lifeplanSelections.forEach(selection => {
+                if (insightsData[selection]) {
+                    insightsHTML.push(`<strong>${selection.charAt(0).toUpperCase() + selection.slice(1)}:</strong> ${insightsData[selection]}`);
+                } else {
+                    console.log(`No data found for ${zodiacSign} - ${selection}`); // Debugging log
+                }
+            });
+
+            if (insightsHTML.length > 0) {
+                resultHTML += `<p>${insightsHTML.join(' | ')}</p>`;
+            } else {
+                resultHTML += `<p>No insights available for ${zodiacSign}.</p>`;
+            }
+        } else {
+            resultHTML += `<p>No data available for ${zodiacSign}.</p>`;
+        }
+
+        // Display the result
+        resultDiv.innerHTML = resultHTML;
+
+        // Handle Next button click
+        document.getElementById("next-btn").addEventListener("click", function () {
+            // Hide the zodiac predictions
+            resultDiv.style.display = 'none';
+
+            // Show the thank you message
+            thankYouMessage.style.display = 'block';
+
+           
+                window.location.href = "feedback.html"; // Replace with the actual next page URL
+            
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Options</title>
+    <style>
+        body {
+            background-image: url('https://framerusercontent.com/images/gJtIgPv1KcReQqYtkgub8Si6rFY.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        .menu-bar {
+            background-color: #333;
+            width: 100%;
+            padding: 14px 0;
+            text-align: center;
+        }
+
+        .menu-bar a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .menu-bar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .options-container {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            width: 300px;
+            color: white;
+            text-align: center;
+        }
+
+        .options-container label {
+            display: block;
+            padding: 10px 0;
+        }
+
+        .options {
+            display: none;
+        }
+
+        .show-options {
+            display: block;
+        }
+
+        .final-submit-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none; /* Initially hidden */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-bar">
+        <a href="javascript:void(0);" onclick="toggleOptions('basis-options')">Basis</a>
+        <a href="javascript:void(0);" onclick="toggleOptions('lifeplan-options')">LifePlan</a>
+    </div>
+
+    <div id="basis-options" class="options-container options">
+        <h3>Basis Options</h3>
+        <label><input type="radio" name="basis" value="weekly" onclick="checkCategorySelections()"> Weekly</label>
+        <label><input type="radio" name="basis" value="monthly" onclick="checkCategorySelections()"> Monthly</label>
+        <label><input type="radio" name="basis" value="yearly" onclick="checkCategorySelections()"> Yearly</label>
+    </div>
+
+    <div id="lifeplan-options" class="options-container options">
+        <h3>LifePlan Options</h3>
+        <label><input type="radio" name="lifeplan" value="wealth" onclick="checkCategorySelections()"> Wealth</label>
+        <label><input type="radio" name="lifeplan" value="relationship" onclick="checkCategorySelections()"> Relationship</label>
+        <label><input type="radio" name="lifeplan" value="health" onclick="checkCategorySelections()"> Health</label>
+        <label><input type="radio" name="lifeplan" value="education" onclick="checkCategorySelections()"> Education</label>
+    </div>
+
+    <button id="finalSubmitButton" class="final-submit-button" onclick="navigateToNextPage()">Submit</button>
+
+    <script>
+        function toggleOptions(optionId) {
+            const optionElement = document.getElementById(optionId);
+            optionElement.classList.toggle("show-options");
+        }
+
+        function checkCategorySelections() {
+            const basisSelected = document.querySelector("input[name='basis']:checked");
+            const lifeplanSelected = document.querySelector("input[name='lifeplan']:checked");
+            const finalSubmitButton = document.getElementById("finalSubmitButton");
+
+            finalSubmitButton.style.display = (basisSelected && lifeplanSelected) ? 'inline-block' : 'none';
+        }
+
+        function navigateToNextPage() {
+            const selectedZodiac = new URLSearchParams(window.location.search).get('zodiac');
+
+            // Get selected basis and life plan options
+            const basisOption = document.querySelector("input[name='basis']:checked").value;
+            const lifeplanOption = document.querySelector("input[name='lifeplan']:checked").value;
+
+            // Debugging logs
+            console.log("Selected Zodiac:", selectedZodiac);
+            console.log("Basis Selection:", basisOption);
+            console.log("LifePlan Selection:", lifeplanOption);
+
+            // Prepare URL parameters
+            const params = new URLSearchParams();
+            params.append('zodiac', selectedZodiac);
+            params.append('basis', basisOption); // Send selected basis option
+            params.append('lifeplan', lifeplanOption); // Send selected life plan option
+
+            // Navigate to display page
+            window.location.href = 'display.html?' + params.toString();
+        }
+    </script>
+
+</body>
+</html>
